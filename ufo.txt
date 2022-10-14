@@ -1,0 +1,214 @@
+Unity 2-D UFO
+
+Steps 1 (Creating Main Scene)
+ Open unity editor. Create new project by 
+choosing file->new project->UFO Game->set the 
+project preferences as 2D->Click Create Project 
+Button.
+To import art asset from Unity Asset Store(The 
+asset store is a technology the unity provide where 
+creaters can buy , sell assets which include art , 
+music , scripts etc) Window->asset store->By 
+default asset store is opened as docked tab so 
+undocked tab and expand window.
+At the bottom there is unity Essentials -> Sample 
+projects ->2D UFO Tutorial->Download. After 
+download click on import button to continue. Now 
+close the asset window and save the scene by File -
+> Save scene in asset directory in folder called 
+scenes name it Main .
+
+Step 2 (Creating Game board or Playfield)
+ In Asset Folder -In Sprites folder select 
+Background drag and drop it in Hierarchy window 
+-Move the cursor over the scene view and type F 
+key - Select gizmos menu in scene view in that 
+uncheck the show grid option
+Create player object(UFO)-In sprites folder select 
+UFO and drag it into hierarchy a game object is 
+created-Click on UFO go to inspector rename the 
+game object UFO to Player
+Adding sorting layer-Click on Player go to 
+inspector in Sprite Renderer Component click on 
+Sprite layer drop down to add Sorting Layer-Click 
+on background in hierarchy go to inspector in that 
+Sprite Renderer and set the sorting layer from 
+default to Background. Click on Player object in 
+hierarchy go to inspector in that sprite Renderer 
+and set the sorting layer from default to Player
+Scale about player-Go to scale tool simply grab the 
+axis you want to change or click and drag on the 
+title of scale you want to change in inspector or just 
+select the scale option in inspector and give the 
+values for x=0.75 and y=0.75 and save the scene
+View of camera-Click on main camera -Go to 
+inspector in that go to Camera Component select 
+size set it to 16.5
+Click on background to change the background 
+color by clicking on the color icon and select it by 
+giving the values
+
+Step 3 (Controlling the player)
+ To attach new Rigidbody component – Select 
+the Player Game object-add component – In 
+inspector choose rigidbody2d.
+Create a new C# script – Select player game object –
+add component – selection new script – name it 
+player controler – choose language C# - create and 
+Add. Select Script – open button (In Inspector). 
+Remove sample Code provided.
+In Script write code-
+Public float speed; private Rigidbody2d rb2d; void 
+start(){ rb2d =GetComponent<Rigidbody2D>() ; } 
+void fixedupdate(){ float movehorizontal = 
+Input.GetAxis(“horizontal”); float moveverticle = 
+Input.GetAxis(“verticle”); Vector2 movement = 
+new Vector2 (moveHorizontal , moveVerticle); 
+rb2d.AddForce(movement * speed); }
+Select Player set Gravity property to 0 and speed 
+property to 10.
+
+Step 4(Adding collision)
+ Click on Player object-Go to inspector windowIn Rigidbody 2D set Gravity Scale to 0 and Player 
+Controller Speed to 10-Click on Add Component 
+then type circle select Circle Collider 2D and edit 
+the radius value to 2.15 in Circle Collider 2D . Click 
+on Background object-Go to inspector window-
+Click on Add Component then type Box and select 
+Box Collider 2D-In Box Collider 2D edit the offset 
+value for x=14.3 size x=3.3 and offset value for y=0 
+size=31.64-Similarly copy and paste this Box 
+Collider 2D three times by Copy Component and 
+Paste Component As New and change the offset 
+values for x and y as following x=-14.3 size x=3.3 
+and y=0 size y= 31.64 ,X=0 size x=31.64 and y= 
+14.2,size y=3.3 ,x=0 size x=31.64 and y=-14.2 size 
+y=3.3
+
+Step5(following the player with camera)
+ Drag camera above the player in hierarchy-
+>Click on Add components on the right hand side 
+of the screen and name the script 
+CameraController. ->Click on New script then click 
+create and Add. ->CameraController is created in 
+assets in project view->Drag CameraController and 
+put it in script in assests->Then open scripts for 
+editing->Then on 6th line write public Gameobject 
+player;->Then on 9th line write private Vector3 
+offset;-> Inside void start() write offset= transform. 
+position - player.transform.position; ->Inside void 
+LateUpadte() write transform. position = 
+player.transform.position + offset;->Then close the 
+bracket->Save the script and return to unity. ->Drag 
+the player game object onto the player slot into the 
+CameraController component.
+
+Step 6(Creating Collectables)
+ In sprite folder-> Drag the sprite Pickup in to 
+the hierarchy.->Set the sorting layer to Pickups.-
+>Select the Player game object and deselect the 
+checkbox in front of the Name field. Focus the scene 
+view camera and press F key. Add Component -
+Physics 2Dthen Circle Collider 2D Adjust the 
+Radius property of the circle collider 2D.
+Create a new Script and place it into Script 
+folder.Open the Scripts folder and double click to 
+open it for editing.->remove the sample code. Type 
+Transform inside Update. Select it and hold down 
+the control key on windows. Select Transform-
+>Rotate. return to our code. write .rotate (new 
+Vector3 (0, 0, 45)).
+drag the Pickup game object from our hierarchy 
+and place it in to our Prefabs folder. create a new 
+game object. And call it Pickups ->Next drag our 
+Pickup game object on to it.
+Click and drag the pickup game object to move it in 
+to the first pickup position at the top of the playing 
+area.->With the game object still selected duplicate 
+it. This can be done either by selecting Edit -> 
+Duplicate, or by using the hot key combination.
+
+Step 7(Pick Up Collectables)
+ Click on Player go to inspector and check the 
+player to reactive and make it visible in the sceneselect player controller (script) and double click on 
+script to edit it and type the code as follows and 
+save itVoid OnTriggerEnter2D(Collider2Dother){ 
+If(other.gameObject.CompareTag(“Pick”)) { 
+Other.gameObject.SetActive(false); } }}-Click on 
+Assets folder select Prefabs and highlight the 
+pickup-go to inspector of pickup and set the tag 
+value to Pickup from Untagged and save the sceneIn inspector go to circleCollider2D and select the 
+option is Triggered and make it checked that is 
+setting it to true-Again in inspector go to Add 
+Component select Physics 2D in that select 
+Rigidbody 2D-In Rigidbody 2D select is Kinematic 
+and make it checked and save the scene and enter 
+play mode to test
+
+Step8(Counting and displaying score)
+ Open Player controller Script – type code –
+private int count; ->In void start(){type count=0;} 
+In OnTriggerEnter2D(Collider2Dother){ 
+count=count+1;} save and return to unity.
+In hierarchy create – UI – text . Now in , Canvas –
+text –rename it countText – With the countText still 
+highlighted place the cursor over the scene view 
+and press F key.Zoom mouse wheel. In inspector 
+color – set rgb 255. replace placeholder text to 
+countText.
+Open anchirs and presets menu by clicking on 
+anchor preset-hold ctrl +upper key then select 
+upper left preset. In Rect transform set pos X=10 
+and pos y=-10.
+Open player controller script – add namespace –
+using UnityEngine.UI – public Text counttext; -
+create function 
+SetCountText(){countText.text=‘count:”+count.ToSt
+ring();} In void start(){ SetCountText();- In 
+OnTriggerEnter2D(Collider2Dother){SetCountText(
+);}
+Save and return to unity – drag and drop count text 
+game object to on to the slot of countText in 
+Inspector. 
+In hierarchy create – UI – text – rename it WinText -
+. In Rect transform set pos y=75 . Adjust color and 
+set yellow. Add placeholder text Win Text. Go back 
+to Script – public text winText ; In void start(){ 
+winText = “”; - In setCountText(){ if 
+(count>=12){winText.text=“you win”;} – Save. drag 
+and drop winTtext game object to on to the slot of 
+winText in Inspector.
+
+Step9(Building the Game)
+ To build our game->file-build settings-Select 
+Standalone windows , mac, linux – click Add 
+Curent button – click build button –select build 
+location anywhere and name it (unityufo).
+In unityufo –add new folder-unitybuild1 – save and 
+build inside it.
+To run the game simply run the executable 
+extension .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

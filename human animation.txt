@@ -1,0 +1,225 @@
+– Human Character Animation
+
+Step 1: Setting up the project
+ Open Unity Editor. Create new project by choosing File->New project->Human Character 
+Animation. 
+ Now, set the project reference as 2D->click create project button. Create a folder called 
+“Scenes” and save the current scene in that folder.
+ Go to Assets-> Import Package-> and select the “Characters”.
+ Go to package->characters->Uncheck the first person character since we won’t be working 
+with that.
+ Now make a plane for the character to stand on. Next, make some cubes and ramps for our 
+character to run and walk on. This is optional but, go ahead and drag in the 
+“ThirdPersonController” into the scene. Play and look how the character moves.
+  We are going to build, from scratch, a character that moves similar to this. Once you have 
+got a feel for how the character moves, ThirdPersonController is no longer needed and you 
+can delete it.
+
+Step 2: The Animator
+ Navigate in your project files to Standard Assets -> Characters -> Models and drag in the 
+“Ethan” model.
+ Then create a folder called “Animation”. Now, Right click and go to Create -> “Animator 
+Controller”.
+ Name it “Ethan”. Drag our new Animator Controller onto the Ethan model.
+ The Animator Controller allows you to assign multiple animations to a model. For humanoid 
+characters, such as ours, it requires something called an “Avatar”.
+ Click on the circle next to the Avatar field and find the “EthanAvatar”. Lets have a look at the 
+Avatar.
+ Click “Configure Avatar”.
+ As you can see, the Avatar is just a way for Unity to find and configure the bones in the 
+model. Press done and go back to the Ethan model.
+ Let’s look at some of the settings in the Animator component. Now, go to window->and 
+select Animator tab->Here is where we add in the animations that will effect our model.
+
+Step 3: States
+ In your Project tab set the filter for animations. Look for “HumanoidIdle,” “HumanoidWalk,” 
+and “HumanoidRun”. Drag these three into your Animator tab.
+ Now there are three new boxes in our tab, those are the animations known as State 
+Machines.
+ Also, notice how one of the boxes is orange. The orange one is the first one you selected in 
+your Project tab. That is known a “Default State”.
+ We want the “HumanoidIdle” to be the Default State. To do this right click on 
+“HumanoidIdle” and select “Set as Layer Default State”.
+ See how the Default State has an orange arrow coming from the box that says Entry. This 
+means that as soon as the game starts it will go to the Default State.
+ Press play and see what happens. Our model is idling! That is pretty neat, but it makes for a 
+really boring game. We want our character to be able to run and walk around the scene.
+ To do that, right click on the Default State and select “Make transition”. Then click on the 
+“HumanoidWalk” state. Now press play and look what happens. Ethan idles for a bit then 
+starts walking.
+ Now do the same thing for the run state. Then press play and see what happens. Our player 
+idles, walks, then runs.
+
+Step 4: Parameters & Transitions
+ After creating a model it lacks control as it idle or runs without us doing anything. We use 
+parameters to add control.
+ Parameters are variables that are defined within animator. There are three types of values 
+float, integer, boolean and trigger.
+ For now we will use float to make a float parameter and name it as speed. Then click on the 
+idle to walk transition and set condition for speed to be greater then 0.5
+ After that click on the walk to run transition and set the condition. If speed is greater than
+0.9. Now play, increase or decrease the speed parameter to check the animation.
+ Now to tweak our animation a little more go to each transition and uncheck "Has Exit Time", 
+this will help us get to see whole animation before transitioning.
+ Now make more two transitions while disabling "Has Exit Time" one going from Run to Walk 
+and other from Walk to idle.
+ Set speed 0.9 and less then 0.5 for Run to Walk and for Walk to idle and check the 
+animation.
+
+Step 5: Blending Trees 1D
+ We can't add turning left or right very easily. A better and cleaner way to do this would be 
+through Blend Trees.
+ Blend Trees are a way to blend multiple animations together smoothly in varying degrees.
+ To make a Blend Tree, Right click in the Animator -->select Create State --> From New Blend 
+Tree. Name it "Locomotion" or "OnGround".
+ Double click on it, add three motion fields and put three animations in it idle, walk, run.
+ The thresholds are already setup for us but if you want to customize them uncheck 
+"Automate fields".
+ When the Speed parameter gets over 0.5 the character walks, when Speed equals 1 the 
+character runs. Go back to the Base Layer and delete the three other states.
+ Now make a transition from entry to our Locomotion Blend Tree. Now play and see what 
+happens.
+ Looks good, if you notice it blends the walk and run animation together id Speed is between 
+0.5 to 1.
+
+Step 6: Making Our Character Turn
+ We need our character to be able to turn left and right (obviously!). In order to do this go 
+back to our Locomotion Blend Tree and set the type to “2D Freeform Cartesian”.2D Simple 
+Directional is if you need something slightly more complicated than 1D.
+ Before we do anything though we need to create a new float parameter called 
+“TurningSpeed” and put it in the other parameter slot. Add twelve more motion slots. Look 
+for and assign these animations to it in this order:“StandQuarterTurnRight”, 
+“StandHalfTurnRight”, “HumanoidWalkRight”, “HumanoidWalkRightSharp”, 
+“HumanoidRunRight”, “HumanoidRunRightSharp”, “StandQuarterTurnLeft”, 
+“StandHalfTurnLeft”, “HumanoidWalkLeft”, “HumanoidWalkLeftSharp”, 
+“HumanoidLeftRight”, and “HumanoidRunLeftSharp”.
+ Then assign the values to look like the following. 
+If you did everything you can now play and change the values for Speed and TurnSpeed to 
+see what happens.
+ The Speed parameter is the x value and TurnSpeed is the y value. If the both values equal 0 
+then the player is standing still. If TurnSpeed is -1 the character turns left. If it is 1 the player 
+turns right, all while blending between “StandQuarterTurnRight” or “StandHalfTurnRight.” If 
+Speed equals 1 the player runs, 0.5 and the character walks. If TurnSpeed is 1 and Speed is 1 
+then the player runs right. If both equal 0.5 the player walks right. 
+ If you understand that then you should understand why we set the values to be what they 
+are. Look at this graph for extra visualization. Hopefully, this has cleared up most questions 
+about 2D Freeform Cartesian. If not don’t worry! Just think about it, it’ll come to you.
+
+Step 7: The “Jumping” sub-state machine
+ In order to make our character jump we need a few things. A jump up pose, a fall pose, a 
+landed pose, a way to check if the player presses the jump key, and a way to check if we hit 
+the ground. I am going to do the last two first.
+ Create a new trigger called “Jump”. And then create a 
+boolean called “grounded”. Filter search for the following animations 
+“HumanoidCrouchIdle” (this is our landed pose), “HumanoidFall”, and “HumanoidJumpUp”.
+Before we drag those in we need to change something. If you preview one of the animations 
+you will notice an unwanted twitch. To fix this click edit
+then set the motion to be only one frame long.
+ We first need to create a Sub-State Machine. Right click in the animator and press “Create 
+Sub-State Machine” and Name it jump.
+ Now drag all our Jump poses onto the new Sub-State Machine. Now we can start 
+constructing our Jump action. Make a transition from Any State to the JumpUp pose. Set the 
+condition to be our Jump trigger. Then make a transition from JumpUp to Fall. Make a Fall to 
+Crouch transition but remember we only want it to transition if it hits the ground. Set the 
+condition to be if grounded equals true and uncheck Has Exit Time. 
+ Okay, we have our Jump action setup! Although we still need to add physics, play and tweak 
+the settings to get the look you’re after.
+ Scripting Our Animator, Now we come to the last and arguably most important part of this 
+lesson, Scripting. We have already seen how pretty much everything in the Animator is 
+controlled by parameters. Then create a new script called “PlayerController”.
+→ The way we control parameters through script is first getting access to the Animator.
+private Animator thisAnim;
+Start (){
+thisAnim = GetComponent<Animator>();
+}
+→ Then write something like the following command:
+thisAnim.SetTrigger ("Jump");
+Let’s think about what we need to do. First, we need a forward and backward input:
+void Update (){
+var v = Input.GetAxis ("Vertical");
+thisAnim.SetFloat ("Speed", v);
+}
+→ Use the Unity Input axis Vertical, which by default is the up and down arrows, then put it 
+in a variable and assign that variable to the parameter “Speed”. The Input settings can be 
+configured here.
+Next we need a turning input:
+void Update () {
+var h = Input.GetAxis ("Horizontal");
+var v = Input.GetAxis ("Vertical");
+thisAnim.SetFloat ("Speed", v);
+thisAnim.SetFloat ("TurningSpeed", h);
+}
+→ We use the axis Horizontal, which by default is the left and right arrows, just like we used the 
+Vertical axis only this time assigning it to TurningSpeed. Play and see what happens. 
+Okay our character does a face plant. To fix this, constrain our rotation on the X, Y, and Z axis. 
+Now play and see what happens. Wow, just wow. Now we just need to add the jumping input. In 
+order to jump we need a Rigidbody to act force upon, trigger the Jump parameter, check to see 
+when our character lands, and set “grounded” to be true if the player does land. First, we get the 
+Rigidbody and trigger jump with the input button “Jump”:
+private Animator thisAnim;
+private Rigidbody rigid;
+public float JumpForce = 500;
+void Start () {
+thisAnim = GetComponent<Animator> ();
+rigid = GetComponent<Rigidbody> ();
+}
+void Update () {
+var h = Input.GetAxis ("Horizontal");
+var v = Input.GetAxis ("Vertical");
+thisAnim.SetFloat ("Speed", v);
+thisAnim.SetFloat ("TurningSpeed", h);
+if (Input.GetButtonDown ("Jump")) {
+rigid.AddForce (Vector3.up * JumpForce);
+thisAnim.SetTrigger ("Jump");
+}}
+→ “Jump” by default is set to the space bar in the Input Manager. Then we raycast downwards 
+to see if we have hit the ground while changing the value of “grounded”:
+if (Physics.Raycast (transform.position + (Vector3.up * 0.1f), Vector3.down, groundDistance, 
+whatIsGround)) {
+thisAnim.SetBool ("grounded", true);
+thisAnim.applyRootMotion = true;
+} else {
+thisAnim.SetBool ("grounded", false);
+}
+→ This part needs a float, for how far down check for ground, and a layer mask, to define what 
+ground is. A Layer Mask is a way to group objects, kind of like tags. Declare those here:
+private Animator thisAnim;
+private Rigidbody rigid;
+public float groundDistance = 0.3f;
+public float JumpForce = 500;
+public LayerMask whatIsGround;
+→ This is the full script:
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class PlayerController : MonoBehaviour {
+private Animator thisAnim;
+private Rigidbody rigid;
+public float groundDistance = 0.3f;
+public float JumpForce = 500;
+public LayerMask whatIsGround;
+// Use this for initialization
+void Start () {
+thisAnim = GetComponent<Animator> ();
+rigid = GetComponent<Rigidbody> ();
+}
+// Update is called once per frame
+void Update () {
+var h = Input.GetAxis ("Horizontal");
+var v = Input.GetAxis ("Vertical");
+thisAnim.SetFloat ("Speed", v);
+thisAnim.SetFloat ("TurningSpeed", h);
+if (Input.GetButtonDown ("Jump")) {
+rigid.AddForce (Vector3.up * JumpForce);
+thisAnim.SetTrigger ("Jump");
+}
+if (Physics.Raycast (transform.position + (Vector3.up * 0.1f), Vector3.down, groundDistance, 
+whatIsGround)) {
+thisAnim.SetBool ("grounded", true);
+thisAnim.applyRootMotion = true;
+} else {
+thisAnim.SetBool ("grounded", false);
+}
+}
+}
+→ Make sure WhatIsGround is set to Default. Play and see what happens

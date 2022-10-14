@@ -1,0 +1,51 @@
+COMPARISON OF
+AR/MR/VR
+
+
+AUGMENTEDREALITY (AU)
+1.Augmented reality is field of computer research which deals with the combination of real -
+world and computer generated data.
+2.current use in aircraft, automobile and other applications.
+3. AR is the most accessible reality technology, as people can use their smartphones or tablets 
+to run augmented reality applications.
+4.AR apps use a phone camera to capture the real world; virtual objects are then overlaid and
+users can see them on their smartphone screen.
+5.Augmented reality holds immense potential to create ground-breaking experiences in gaming 
+and entertainment. As an AR game development company with vast experience in reality 
+technologies, juego studios designs and develops fun and exciting augmented reality games for 
+mobile, smart glasses and headsets.
+
+
+MIXED REALITY(MR)
+1. A Mixed Reality (MR) experience, which combines elements of both AR and 
+VR, Mixed Reality (MR), it's technology that blends physical reality and the 
+digital world closely together.
+2. In mixed reality, you interact with and manipulate both physical and virtual 
+items and environments, using next-generation sensing and imaging 
+technologies.
+3. Mixed Reality allows you to see and immerse yourself in the world around 
+you even as you interact with a virtual environment using your own hands—
+all without ever removing your headset.
+4. Mixed reality is sometimes also referred to as hybrid reality or extended 
+reality (XR).• Although mixed reality is still in the early stages, it is already 
+being used in many industries for educational purposes.
+
+
+VIRTUAL REALITY (VR)
+1. VR gaming is the term used to describe a new generation of computer games with virtual 
+reality (VR) technology that gives players a truly immersive, first-person perspective of game 
+action. Participants both experience and influence the game environment through a variety of 
+VR gaming devices and accessories, including VR headsets, sensor-equipped gloves, hand 
+controllers, and more.
+2. Virtual reality games can be played on standalone systems, specialized game consoles, or using 
+advanced laptops and PCs that can power the leading VR headsets such as Oculus Rift, HTC 
+Vive, and Lenovo Mirage Solo.
+3. subsets of virtual reality gaming that use related technologies called augmented reality (AR) 
+and mixed reality (MR), where virtual elements are placed into the player's real world as 
+viewed through a headset or camera.
+4. Lenovo Explorer uses the Windows Mixed Reality platform which, though still quiteVRfocused, introduces new AR and MR experiences.
+5.VR game might involve a 3-D image that can be explored interactively on a computing device 
+by manipulating keys, mouse or touchscreen.
+6.More sophisticated and immersive examples include VR headsets, wrap-around display 
+screens and VR rooms augmented with wearable computers and sensory components, such as 
+scents and haptics devices for tactile feedback.

@@ -1,0 +1,76 @@
+Steps for >
+Creating a game object :
+
+1.Click on Game object > 3D Objects > Plane
+2.Rename It as “surface”
+3.Again click on Game object > 3D Objects > cube 
+4.Rename It as “any name you want” or leave as It as it is.
+5. TO ADD COLOR TO PLANE AND CUBE:
+⮚ Click on create In project Windows > folder. Rename it as “Material
+⮚ With the “Material” folder selected , again click on “create” menu and select “Materials”.
+⮚ Now Rename it as “background” and hit Enter.
+⮚ Select Albedo and choose a different color of your choice and drag it on the screen
+6. Repeat Step 5 for “Cube colour”.
+
+
+For Animation of Cube / or game object
+1. Click on “cube” and go to windows > Animation > Animation.
+❑ A new window will Appear
+2. Create a new Animation by clicking on “create” and name the animation and save It.
+3. Now Click on Add property > Transform > Rotation >
+❑ Now , set the values on x , y and z axis to be Rotated , with time duration / suitable time duration
+❑ For eg:
+On Zero(0) sec On 20 sec On 40 sec On 60 sec
+X = 0 X = 0 X = 0 X = 0
+Y = 0 Y = 90 Y = 360 Y = 0
+Z = 0 Z = 0 Z = 0 Z = 0
+4. Similarly , repeat Step 3 for “ Position ”
+❑ On
+● X axis = 0
+● Y axis = 0 For 0 sec
+● Z axis = 0
+❑ On
+● X axis = 2
+● Y axis = 2 For 20 sec
+● Z axis = 2
+❑ On
+● X axis = 4
+● Y axis = 4 For 40 sec
+● Z axis = 4
+❑ On
+● X axis = 0
+● Y axis = 0 For 60 sec
+● Z axis = 0
+
+
+
+For animation oF “ GreetinGs “ / “ text “
+Steps :
+1. Click on Game Object > 3D Object > 3D Text
+2. Rename It as “ Greetings “.
+3. In Inspector Windows _ In text window type as “ Hello –Tycs !!! “ and hit Enter.
+4. With “ Greetings “ selected , click on Windows > Animation > Animation.
+5. Name the “ Animation “ and save it.
+6. Now click on Add property > Transform > position
+7. Set the suitable values for x , y and z axis for suitable 0 , 20 , 40 , 60 sec.
+❑ For eg:
+▪ On 0sec : X = 5 , Y = 2 , Z = 0
+▪ On 20sec: X = 8 , Y = 2 , Z = 0
+8. Now again select “ Greetings “ > Windows > Animation
+▪ Click on Add property > Mesh Render > Material_color.
+▪ Again set values for the text color for different timings.
+For eg:
+▪ For 0sec :
+x = 1 , y = 1 , z = 1
+▪ For 20sec :
+y = 0 , x = 1 , z = 0
+▪ For 40sec :
+r = 1 , g = 0 , b = 0
+9. Again Select “ Greetings “ > Windows > Animation
+10. Click on Add property > Mesh Render > MainText _ 
+TextAlignment / size
+⮚ Set value for X = 0 for 0sec.
+⮚ Set value for X = 8 for 20sec.
+⮚ Set value for X = 12 for 40sec.
+⮚ Set value for X = 20 for 60sec.
+10. Now Run Or play the Animation of Text and Object using “ Play Button".

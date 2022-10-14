@@ -1,0 +1,160 @@
+: Roll a ball game using unity 3d
+
+STEP1:OPEN UNITY SOFTWARE
+>New
+>provide project name("Rolling_ball")
+>click on create project
+STEP2:
+>Right click on Asset folder....create...Folder(Name it as "Code")
+>Right click on Asset folder....create...Folder(Name it as "Objects")
+>Right click on Asset folder....create...Folder(Name it as "Materials")
+STEP3:
+>click on create.... 3D object....Sphere(Rename it as ball)
+>click on create.... 3D object....Plane(Rename it as Playground)
+>>click on create.... 3D object....Cube(Rename it as wall1)
+>>click on create.... 3D object....Cube(Rename it as wall2)
+>>click on create.... 3D object....Cube(Rename it as wall3)
+>>click on create.... 3D object....Cube(Rename it as wall4)
+>>click on create.... 3D object....Cube(Rename it as Obstacle1)
+>>click on create.... 3D object....Cube(Rename it as Obstacle2)
+>>click on create.... 3D object....Cube(Rename it as Obstacle3)
+>>click on create.... 3D object....Cube(Rename it as Obstacle4)
+STEP4: 
+>Drag and drop sphere in object folder(asset...object)
+>Drag and drop plane in object folder(asset...object)
+>Drag and drop wall1 in object folder(asset...object)
+>Drag and drop obstacle1 in object folder(asset...object)
+STEP5:
+>right click on materials folder...create...Materials
+>select Albedo and select color blue...close the color window
+>right click on materials folder...create...Materials
+>select Albedo and select color red...close the color 
+>right click on materials folder...create...Materials
+>select Albedo and select color yellow...close the color window
+>right click on materials folder...create...Materials
+>select Albedo and select color black...close the color window
+STEP6:
+>drag and drop red material on ball
+>drag and drop yellow material on plane
+>drag and drop blue material on obstacle1,obstacle2,obstacle3,obstacle4
+>drag and drop black material on wall1,wall2,wall3,wall4.
+STEP7:
+>click on the main camera
+Set rotation at x=30
+>click on playground
+Set scale at x=2,y=2,z=1.5
+>click on wall1
+Set x=20,y=5
+STEP8:
+Click on the ball
+>go to inspector
+>click on ADD COMPONENT
+>click on PHYSICS
+>click on RIGIDBODY
+STEP9:
+Click on obstacle
+>go to inspector window
+>select tag
+>click on Add tag
+>click on "+"
+>provide tag name as "obst"
+>click on save
+Shift and select obstacle1,obstacle2,obstacle3,obstacle4,obstacle5 and Go to 
+Inspector window Click on Tag...select "obst"
+STEP 10:
+Go to asset
+>right click on code
+>create
+>click on C# script
+>rename it as ballmotion
+>right click on file ballmotion
+>click on open C# project
+STEP 11:
+Create UI..
+>Text
+>rename it as Scoreboard
+>in inspector..in Text ,type:Score=0
+>set font size,font style,select color
+Click on Anchors: Shift and Alt...select Position of text you want to display
+STEP12:
+Create UI..
+>Text
+> rename it as wintext
+>in inspector..leavw text empty
+>set font size,font style,select color
+STEP13:
+Add namespace:
+using UnityEngine.UI;
+type the code
+public float speed;
+public Text scoreboard;
+public int score=0;
+public Text winboard;
+void update()
+{
+float hinput=Input.GetAxis("Horizontal");
+float vinput=Input.GetAxis("Vertical");
+Rigidbody me=GetComponent<Rigidbody>();
+Vector3 motion=new Vector3(hinput,0.of,vinput);
+me.AddForce(motion*speed);
+}
+void OnCollisionEnter(Collision who)
+{
+if(who.gameObject.CompareTag("obst"))
+{
+who.gameObject.SetActive(false);
+score=score+1;
+scoreboard.text="Score:" + score.ToString();
+if(score==12)
+{
+winboard.text="YOU WIN!";
+speed=0;
+}
+}
+}
+SAVE THIS CODE AND DRAG AND DROP IT ON BALL.
+STEP14:
+Click on Ball...
+in Inspector...in ballmotion script...click on Select Textbox for scoreboard and click on 
+scoreboard
+click n ball..
+In Inspector...in ballmotion script click on select wintext for wintext and click on wintxt
+STEP15:
+gp to assets...Right click on code...Create...Click on c# script...rename it with 
+ballandcamera
+Right click on File ballandcamera...click on oprn c# Project
+Type the code
+private Vector3 camandball;
+public GameObject anyobj;
+void Start()
+{
+camandball=transform.position-anyobj.transform.position;
+}
+void Update()
+{
+transform.position=anyobj.transform.position+camandball;
+}
+STEP16:
+Go to asset...right click on code...create....click on c# project..rename it as obstacle
+Rightclick on file obstacle...click on open c# project
+TYPE HE CODE
+//start is called before the first frame update
+void Start()
+{
+}
+//update is called once per frame
+void Update()
+{
+tranform.Rotate(new Vector3(15,30,45)*Time.deltaTime);
+}
+STEP17:
+go to file...
+>build and setting
+>click on Add Open Scene
+>select Target platform
+"windows" and Architecture"x86"
+>click on build
+>create a folder named as "x86"
+>click on select folder
+>Rolling_ball.exe File will be saved in x86 folder.
+>Double click that exe file...ready to play game
